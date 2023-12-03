@@ -1,4 +1,4 @@
-interface Book {
+interface iBook {
     title:string;
     description:string;
     authors:string;
@@ -7,7 +7,27 @@ interface Book {
     fileName?:string|null;
 }
 
-class bookClass implements Book {
+abstract class aBooksRepository{
+    // создание книги        
+    createBook(book:Book):Book{ return book; }
+    // получение книги по id    
+    getBook(id:string):Book{ return; }
+    //получение всех книг    
+    getBooks():Array<Book>{ return []; }
+    // обновление книги.
+    updateBook(id:string):Book{ return;}
+    // удаление книги
+    deleteBook(id:string):boolean{ return Math.random()>0.5?true:false; }
+
+}
+
+class BooksRepository extends aBooksRepository{
+    constructor(){
+        super();
+    }
+}
+
+class Book implements iBook {
     title:string;
     description:string;
     authors:string;
