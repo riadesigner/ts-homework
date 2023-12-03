@@ -13,11 +13,11 @@ const $container = document.getElementById('info');
 let d=10;
 d = d++;
 
-let n:any;
+let n;
 n+= 100;
 n = 300;
 
-const g = "vasya";
+
 
 if($container){
     const str = `Книга: ${book.name}, 
@@ -30,4 +30,4 @@ if($container){
 
 
 // const l = d*d;
-// console.log(`l = ${l}`);
+// console.log(`l = ${l}`);`~

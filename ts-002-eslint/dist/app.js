@@ -1,4 +1,3 @@
-"use strict";
 const book = {
     name: "Title",
     isbn: "123"
@@ -9,7 +8,6 @@ d = d++;
 let n;
 n += 100;
 n = 300;
-const g = "vasya";
 if ($container) {
     const str = `Книга: ${book.name}, 
         ${book.isbn}, всего ${d}
@@ -18,4 +16,4 @@ if ($container) {
     $container.innerHTML = str;
 }
 // const l = d*d;
-// console.log(`l = ${l}`);
+// console.log(`l = ${l}`);`~
