@@ -1,3 +1,11 @@
 "use strict";
-const d = 10;
-console.log(`d = ${d}`);
+class bookClass {
+    constructor(title, description, authors, favorite = null, fileCover = null, fileName = null) {
+        this.title = title;
+        this.description = description;
+        this.authors = authors;
+        this.favorite = favorite;
+        this.fileCover = fileCover;
+        this.fileName = fileName;
+    }
+}
