@@ -1,2 +1,2 @@
 # ts-homework
-some home work on nodejs/ts course
+some home work at nodejs/ts course
