@@ -4,7 +4,10 @@
 ПРИМЕР РАБОТЫ С IOC И DI (JAVASCRIPT)   
 
 контейнер создается здесь:    
-./app/infrastructure/
+./app/infrastructure/   
+
+используется здесь:    
+./app/books/book-routes.js
 
 ### пакеты
 
