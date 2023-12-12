@@ -3,7 +3,8 @@
 
 ПРИМЕР РАБОТЫ С IOC И DI (JAVASCRIPT)   
 
-контейнер здесь: ./app/infrastructure/
+контейнер создается здесь:    
+./app/infrastructure/
 
 ### пакеты
 
