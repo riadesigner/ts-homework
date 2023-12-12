@@ -1,15 +1,15 @@
 
 # Библиотека книг
 
--- JAVASCRIPT --   
+-- TYPESCRIPT --   
 
 ПРИМЕР РАБОТЫ С IOC И DI   
 
 контейнер создается здесь:    
-./app/infrastructure/   
+./app/src/infrastructure/   
 
 используется здесь:    
-./app/books/book-routes.js
+./app/src/books/book-routes.ts
 
 ### пакеты
 
@@ -29,7 +29,7 @@
 
 ### запуск с помощью yml
 
-docker compose up
+docker compose up    
 
 ```yml title="docker-compose.yml"
 
@@ -52,18 +52,20 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017
 
   library:
-    image: riadesigner/lib-mongo:v-1.0.0
+    image: node:20.8-alpine
     restart: always
     working_dir: /app
+    volumes:
+      - ./app:/app
     ports:
       - 8080:8080
     environment:
       - PORT=8080
-      - MONGO_URL=mongodb://root:example@mongo:27017/
-    command: npm run start
+      - MONGO_URL=mongodb://root:example@mongo:27017
+    command: npm run dev
     depends_on:
       - mongo
 
