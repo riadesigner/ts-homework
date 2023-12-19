@@ -1,4 +1,4 @@
-# nodejs learning app
+# nestjs learning app
 
 ### Пример подключения модуля Book
 
