@@ -1,34 +1,23 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { iBook, iBookDto, iBookService } from './book.abstract';
-import { DB } from '../db';
 
-@Injectable()
-export class Book implements iBook {
-  constructor(
-    public title = '',
-    public description = '',
-    public authors = '',
-    public favorite = '',
-    public fileCover = '',
-    public fileName = '',
-    public fileBook = '',
-  ) {
-    return this;
-  }
-}
+import { Model } from 'mongoose';
+import { Book, BookDocument } from './book.schema';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class BookService implements iBookService {
-  constructor(@Inject(DB) public db: DB) {}
+  constructor(@InjectModel(Book.name) private bookModel: Model<BookDocument>) {}
   getAllBooks(): Promise<iBook[] | null> {
     return new Promise(async (res) => {
-      res(this.db.getAllBooks());
+      res(this.bookModel.find());
     });
   }
   createBook(bookDto: iBookDto): Promise<iBook> {
     return new Promise(async (res) => {
-      const book = await this.db.addBook(bookDto);
-      res(book);
+      const newBook = new this.bookModel(bookDto);
+      await newBook.save();
+      res(newBook);
     });
   }
 }

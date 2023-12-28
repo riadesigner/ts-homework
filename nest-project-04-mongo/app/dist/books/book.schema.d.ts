@@ -22,12 +22,20 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { iBook, iBookDto, iBookService } from './book.abstract';
-import { Model } from 'mongoose';
-import { BookDocument } from './book.schema';
-export declare class BookService implements iBookService {
-    private bookModel;
-    constructor(bookModel: Model<BookDocument>);
-    getAllBooks(): Promise<iBook[] | null>;
-    createBook(bookDto: iBookDto): Promise<iBook>;
+import { Document } from 'mongoose';
+import { iBook } from './book.abstract';
+export type BookDocument = iBook & Document;
+export declare class Book implements iBook {
+    title: string;
+    description: string;
+    authors: string;
+    favorite: string;
+    fileCover: string;
+    fileName: string;
+    fileBook: string;
 }
+export declare const BookSchema: import("mongoose").Schema<Book, import("mongoose").Model<Book, any, any, any, Document<unknown, any, Book> & Book & {
+    _id: import("mongoose").Types.ObjectId;
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Book, Document<unknown, {}, import("mongoose").FlatRecord<Book>> & import("mongoose").FlatRecord<Book> & {
+    _id: import("mongoose").Types.ObjectId;
+}>;

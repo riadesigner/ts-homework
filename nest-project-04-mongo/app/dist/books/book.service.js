@@ -12,46 +12,32 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookService = exports.Book = void 0;
+exports.BookService = void 0;
 const common_1 = require("@nestjs/common");
-const db_1 = require("../db");
-let Book = class Book {
-    constructor(title = '', description = '', authors = '', favorite = '', fileCover = '', fileName = '', fileBook = '') {
-        this.title = title;
-        this.description = description;
-        this.authors = authors;
-        this.favorite = favorite;
-        this.fileCover = fileCover;
-        this.fileName = fileName;
-        this.fileBook = fileBook;
-        return this;
-    }
-};
-exports.Book = Book;
-exports.Book = Book = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [Object, Object, Object, Object, Object, Object, Object])
-], Book);
+const mongoose_1 = require("mongoose");
+const book_schema_1 = require("./book.schema");
+const mongoose_2 = require("@nestjs/mongoose");
 let BookService = class BookService {
-    constructor(db) {
-        this.db = db;
+    constructor(bookModel) {
+        this.bookModel = bookModel;
     }
     getAllBooks() {
         return new Promise(async (res) => {
-            res(this.db.getAllBooks());
+            res(this.bookModel.find());
         });
     }
     createBook(bookDto) {
         return new Promise(async (res) => {
-            const book = await this.db.addBook(bookDto);
-            res(book);
+            const newBook = new this.bookModel(bookDto);
+            await newBook.save();
+            res(newBook);
         });
     }
 };
 exports.BookService = BookService;
 exports.BookService = BookService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, common_1.Inject)(db_1.DB)),
-    __metadata("design:paramtypes", [db_1.DB])
+    __param(0, (0, mongoose_2.InjectModel)(book_schema_1.Book.name)),
+    __metadata("design:paramtypes", [mongoose_1.Model])
 ], BookService);
 //# sourceMappingURL=book.service.js.map
