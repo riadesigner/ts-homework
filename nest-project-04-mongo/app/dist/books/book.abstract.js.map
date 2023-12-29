@@ -1,1 +1,1 @@
-{"version":3,"file":"book.abstract.js","sourceRoot":"","sources":["../../src/books/book.abstract.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAA4C;AAE5C,MAAe,KAAK;CAQnB;AAmBQ,sBAAK;AANd,IAAe,YAAY,GAA3B,MAAe,YAAY;CAI1B,CAAA;AAEyB,oCAAY;uBANvB,YAAY;IAD1B,IAAA,mBAAU,GAAE;GACE,YAAY,CAI1B"}
+{"version":3,"file":"book.abstract.js","sourceRoot":"","sources":["../../src/books/book.abstract.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAA4C;AAE5C,MAAe,KAAK;CAQnB;AAkCQ,sBAAK;AAhBd,IAAe,YAAY,GAA3B,MAAe,YAAY;CAc1B,CAAA;AAEyB,oCAAY;uBAhBvB,YAAY;IAD1B,IAAA,mBAAU,GAAE;GACE,YAAY,CAc1B"}

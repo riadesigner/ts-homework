@@ -20,10 +20,29 @@ let BookController = class BookController {
         this.bookService = bookService;
     }
     async getAllBooks() {
-        const all = await this.bookService.getAllBooks();
-        await this.bookService.createBook({ title: `Книга ${all.length}` });
         const books = await this.bookService.getAllBooks();
         return JSON.stringify(books);
+    }
+    async getBookById(id) {
+        const book = await this.bookService.getBookById(id);
+        if (book) {
+            return JSON.stringify(book);
+        }
+        else {
+            return `книги с номером ${id} нет`;
+        }
+    }
+    async createBook(bookDto) {
+        const answer = await this.bookService.createBook(bookDto);
+        return answer;
+    }
+    async updateBook(id, bookDto) {
+        const answer = await this.bookService.updateBookById(id, bookDto);
+        return answer;
+    }
+    async deleteBook(id) {
+        const answer = await this.bookService.deleteBookById(id);
+        return answer;
     }
 };
 exports.BookController = BookController;
@@ -33,6 +52,35 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], BookController.prototype, "getAllBooks", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], BookController.prototype, "getBookById", null);
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], BookController.prototype, "createBook", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], BookController.prototype, "updateBook", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], BookController.prototype, "deleteBook", null);
 exports.BookController = BookController = __decorate([
     (0, common_1.Controller)('books'),
     __param(0, (0, common_1.Inject)('iBookService')),

@@ -22,12 +22,15 @@
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
-import { iBook, iBookDto, iBookService } from './book.abstract';
+import { iBook, iBookDto, iBookService, Answer } from './book.abstract';
 import { Model } from 'mongoose';
 import { BookDocument } from './book.schema';
 export declare class BookService implements iBookService {
     private bookModel;
     constructor(bookModel: Model<BookDocument>);
     getAllBooks(): Promise<iBook[] | null>;
-    createBook(bookDto: iBookDto): Promise<iBook>;
+    getBookById(id: string): Promise<iBook | null>;
+    createBook(bookDto: iBookDto): Promise<Answer | null>;
+    updateBookById(id: string, bookDto: iBookDto): Promise<Answer | null>;
+    deleteBookById(id: string): Promise<Answer | null>;
 }

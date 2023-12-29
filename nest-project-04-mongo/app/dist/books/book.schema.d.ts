@@ -24,7 +24,7 @@
 /// <reference types="mongoose/types/inferschematype" />
 import { Document } from 'mongoose';
 import { iBook } from './book.abstract';
-export type BookDocument = iBook & Document;
+export type BookDocument = Book & Document;
 export declare class Book implements iBook {
     title: string;
     description: string;

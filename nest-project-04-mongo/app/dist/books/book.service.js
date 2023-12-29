@@ -23,14 +23,83 @@ let BookService = class BookService {
     }
     getAllBooks() {
         return new Promise(async (res) => {
-            res(this.bookModel.find());
+            const allbooks = await this.bookModel.find().select('-__v');
+            res(allbooks);
+        });
+    }
+    getBookById(id) {
+        return new Promise(async (res) => {
+            try {
+                const book = await this.bookModel.findById(id).select('-__v');
+                res(book);
+            }
+            catch (e) {
+                res(null);
+            }
         });
     }
     createBook(bookDto) {
         return new Promise(async (res) => {
+            console.log('bookDto', bookDto);
+            if (!bookDto.title) {
+                res({
+                    error: true,
+                    data: 'не все обязательные параметры указаны',
+                });
+                return;
+            }
             const newBook = new this.bookModel(bookDto);
             await newBook.save();
-            res(newBook);
+            res({
+                error: false,
+                data: newBook,
+            });
+        });
+    }
+    updateBookById(id, bookDto) {
+        return new Promise(async (res) => {
+            try {
+                const book = await this.bookModel.findById(id);
+                const { title } = bookDto;
+                if (!title) {
+                    res({
+                        error: true,
+                        data: 'не все обязательные параметры указаны',
+                    });
+                    return;
+                }
+                book.title = title;
+                await book.save();
+                console.log(`updated book ${id}`, bookDto);
+                res({
+                    error: false,
+                    data: book,
+                });
+            }
+            catch (e) {
+                res({
+                    error: true,
+                    data: `книги с номером ${id} не существует`,
+                });
+            }
+        });
+    }
+    deleteBookById(id) {
+        return new Promise(async (res) => {
+            try {
+                const book = await this.bookModel.findById(id);
+                await book.deleteOne();
+                res({
+                    error: false,
+                    data: `книга ${id} удалена`,
+                });
+            }
+            catch (e) {
+                res({
+                    error: true,
+                    data: `книги с номером ${id} не существует`,
+                });
+            }
         });
     }
 };

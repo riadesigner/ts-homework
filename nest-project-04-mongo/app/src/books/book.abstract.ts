@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 abstract class iBook {
-  title?: string;
+  title: string;
   description?: string;
   authors?: string;
   favorite?: string;
@@ -11,7 +11,7 @@ abstract class iBook {
 }
 
 interface iBookDto {
-  title?: string;
+  title: string;
   description?: string;
   authors?: string;
   favorite?: string;
@@ -20,11 +20,26 @@ interface iBookDto {
   fileBook?: string;
 }
 
+type Answer = {
+  error: boolean;
+  data: iBook | string;
+};
+
 @Injectable()
 abstract class iBookService {
-  //   abstract getBookById(id: string): Promise<iBook | null>;
-  abstract createBook(bookDto: iBookDto | null): Promise<iBook | null>;
+  // GET
   abstract getAllBooks(): Promise<iBook[] | null>;
+  // GET
+  abstract getBookById(id: string): Promise<iBook | null>;
+  // POST
+  abstract createBook(bookDto: iBookDto | null): Promise<Answer | null>;
+  // DELETE
+  abstract deleteBookById(id: string): Promise<Answer | null>;
+  // PUT
+  abstract updateBookById(
+    id: string,
+    bookDto: iBookDto,
+  ): Promise<Answer | null>;
 }
 
-export { iBook, iBookDto, iBookService };
+export { iBook, iBookDto, iBookService, Answer };

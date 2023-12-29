@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { iBook } from './book.abstract';
 
-export type BookDocument = iBook & Document;
+export type BookDocument = Book & Document;
 
 @Schema()
 export class Book implements iBook {
